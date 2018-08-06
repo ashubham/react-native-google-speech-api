@@ -71,10 +71,16 @@
     recognitionConfig.sampleRateHertz = self.sampleRate;
     recognitionConfig.languageCode = @"en-US";
     recognitionConfig.maxAlternatives = 30;
+  
+    RecognitionMetadata *recognitionMetadata = [RecognitionMetadata message];
+    recognitionMetadata.interactionType = RecognitionMetadata_InteractionType_VoiceSearch;
+    recognitionConfig.metadata = recognitionMetadata;
+    recognitionConfig.model = @"command_and_search";
+    recognitionConfig.useEnhanced = YES;
 
     StreamingRecognitionConfig *streamingRecognitionConfig = [StreamingRecognitionConfig message];
     streamingRecognitionConfig.config = recognitionConfig;
-    streamingRecognitionConfig.singleUtterance = NO;
+    streamingRecognitionConfig.singleUtterance = YES;
     streamingRecognitionConfig.interimResults = YES;
 
     StreamingRecognizeRequest *streamingRecognizeRequest = [StreamingRecognizeRequest message];
